@@ -43,38 +43,9 @@
     <canvas id="myChart"></canvas>
   </div>
 
-  <script>
-    // We request a database instance.
-    const request = indexedDB.open("transaction", 1);
-
-    // Create an object store inside the onupgradeneeded method.
-    request.onupgradeneeded = ({ target }) => {
-      const db = target.result;
-      const transactionStore = db.createObjectStore("transaction", {keyPath: "name"});
-      transactionStore.createIndex("valueIndex", "value");
-    };
-
-    request.onsuccess = () => {
-      const db = request.result;
-      const transaction = db.transaction(["transaction"], "readwrite");
-      const transactionStore = transaction.objectStore("transaction");
-      const valueIndex = transactionStore.index("valueIndex");
-
-      transactionStore.add({ name: `${transaction.name}`, value: `${transaction.value}` });
-
-      const getRequest = transactionStore.get(`${transaction.name}`);
-      getRequest.onsuccess = () => {
-        console.log(getRequest.result);
-      };
-
-      const getRequestValue = valueIndex.getAll(`${transaction.value}`);
-      getRequestValue.onsuccess = () => {
-        console.log(getRequestValue.result);
-      };
-    };
-  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="/db.js"></script>
   <script src="index.js"></script>
 </body>
 
