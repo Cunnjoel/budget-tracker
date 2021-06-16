@@ -3,10 +3,10 @@ const path = require('path');
 
 const config = {
   entry: {
-    app: './index.js',
+    app: './public/index.js',
   },
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + 'public/dist',
     filename: '[name].bundle.js',
   },
   mode: 'development',
@@ -36,9 +36,9 @@ const config = {
       start_url: '/',
       icons: [
         {
-          src: path.resolve('icons/icon-192x192.png'),
+          src: path.resolve('public/icons/icon-192x192.png'),
           sizes: [192, 512],
-          destination: path.join('icons'),
+          destination: path.join('public/icons'),
         },
       ],
     }),
